@@ -1,0 +1,33 @@
+@font-face {
+    font-family: Calamity;
+    src: url(fonts/Calamity-Regular.woff2);
+}
+
+:root{
+    --green: #00bf63;
+    --dark-green: #007a3f;
+    --grey: #d9d9d9;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h2{
+    margin: 0;
+    margin-bottom: 18px;
+}
+p{
+    margin: 0;
+    margin-bottom: 8px;
+}
+ul{
+    margin: 0;
+    margin-bottom: 18px;
+}
