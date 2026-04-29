@@ -1,5 +1,22 @@
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import './App.css'
+
+const animVariants = {
+	box: {
+		animate: {},
+		whileTap: {},
+	},
+	button: {
+		animate: { backgroundColor: 'var(--green)', y: 0 },
+		whileTap: { backgroundColor: '#32c27c', y: 10, }
+	},
+	smoothPrescence: {
+		initial: { opacity: 0 },
+		animate: { opacity: 1 },
+		exit: { opacity: 0 }
+	}
+}
 
 function App() {
 	const [datos] = useState(
@@ -56,14 +73,14 @@ function App() {
 
 
 					<h2><strong>Descripción:</strong></h2>
-					<p>Comencé este proyecto para mejorar mis habilidades de programación y realmente cumplió su propósito, aprendí muchísimo. Si lo volviera hacer, aprovecharía tantas cosas que en su momento ignoraba. Me encanta trabajar con lógica desde </p></>
+					<p>Comencé este proyecto para mejorar mis habilidades de programación y realmente cumplió su propósito, aprendí muchísimo. Si lo volviera hacer, aprovecharía tantas cosas que en su momento ignoraba. Me encanta trabajar con lógica desde lo más abstracto.</p></>
 			}
 		})
 	const [selected, setSelected] = useState('Outer Dangers')
 	return (
 		<>
 			<div className="main">
-				<div className="header-content">Catálogo de Demos - Por Maki xP</div>
+				<div className="header-content">Catálogo de Demos</div>
 				<div className="body-content">
 					<div className="game">
 						<div className="wrap">
@@ -72,19 +89,47 @@ function App() {
 								allowFullScreen></iframe>
 						</div>
 						<div className="title">
-							{selected}
+							<AnimatePresence mode='wait'>
+								<motion.span
+									key={selected}
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}>
+									{selected}
+								</motion.span>
+							</AnimatePresence>
 						</div>
 					</div>
 					<div className="info">
-						<div className="description">
-							{datos[selected].description}
-						</div>
+						<AnimatePresence mode='wait'>
+							<motion.div
+								className="description"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								key={selected}
+							>
+								{datos[selected].description}
+							</motion.div>
+						</AnimatePresence>
 						<div className="other-games-row">
 							{Object.keys(datos).map((key) => {
 								return (
-									<div className="game-card" onClick={() => { setSelected(key) }}>
-										{key}
-									</div>
+									<motion.div
+										key={key}
+										variants={animVariants.box}
+										animate="animate"
+										whileTap="whileTap"
+										className="box"
+										onClick={() => {
+											setSelected(key)
+										}}>
+										<motion.div
+											variants={animVariants.button}
+											className="game-card">
+											{key}
+										</motion.div>
+									</motion.div>
 								)
 							})
 							}

@@ -108,13 +108,16 @@ body {
 	height: 50px;
 	background-color: var(--dark-green);
 }
-
+.box{
+	flex-shrink: 0;
+	display: flex;
+}
 .game-card {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-shrink: 0;
-
+	cursor: pointer;
 	color: white;
 	font-family: Calamity;
 	font-size: 20px;
